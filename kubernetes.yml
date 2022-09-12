@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odyssey-reports-centre
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odyssey-reports-centre
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: odyssey-reports-centre
+    spec:
+      containers:
+        - image: localhost:32000/locus/odyssey-reports-centre:1.0
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: development-configmap
+                  key: DB_URL_JDBC
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: development-configmap
+                  key: DB_USER
+            - name: DB_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: development-secret
+                  key: DB_PWD
+            - name: AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: development-configmap
+                  key: AUTH_SERVER_URL
+          imagePullPolicy: Always
+          name: odyssey-reports-centre
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: odyssey-reports-centre
+  namespace: development
+spec:
+  ports:
+    - port: 8080
+      nodePort: 32145
+  selector:
+    app: odyssey-reports-centre
+  sessionAffinity: None
+  type: NodePort
