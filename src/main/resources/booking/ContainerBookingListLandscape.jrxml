@@ -1,0 +1,1784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.13.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ContainerBookingListLandscape" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="782" leftMargin="15" rightMargin="15" topMargin="15" bottomMargin="5" isSummaryNewPage="true" uuid="d0d2862a-6e3b-4a80-aa29-ce74b7fa2873">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="wec_prod"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<subDataset name="summary_datset" uuid="7c159c56-b15e-4223-a224-d5ebc559e65c">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="uat_marfret"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="CARRIER_ID" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="USER_COMPANY_ID" class="java.lang.Long"/>
+		<parameter name="VOYAGE_REF" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="LOAD_PORT_ID_MIN" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="LOAD_PORT_ID_MAX" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DIS_PORT_ID_MIN" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DIS_PORT_ID_MAX" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="VESSEL_NAME" class="java.lang.String"/>
+		<parameter name="VOY_NUM" class="java.lang.String"/>
+		<parameter name="LOGO_IMAGE_ID" class="java.lang.Long"/>
+		<parameter name="LOGO_URL" class="java.lang.String"/>
+		<parameter name="LOAD_TERMINAL_ID" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DISCHARGE_TERMINAL_ID" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="BP_ID" class="java.lang.Long">
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="BA_ID" class="java.lang.Long">
+			<parameterDescription><![CDATA[Required paramemter.
+send 0 for all
+send null for carrier]]></parameterDescription>
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="CONTAINER_OPERATOR_ID" class="java.lang.Long">
+			<parameterDescription><![CDATA[Required paramemter.
+send 0 for all
+send null for carrier]]></parameterDescription>
+			<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+		</parameter>
+		<parameter name="CONTAINER_OPERATOR_NAME" class="java.lang.String"/>
+		<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["C:\\Java\\tools\\Jaspersoft\\data\\Odyssey\\Netbeans\\OdysseyIReport\\src\\com\\locuslive\\odyssey\\jasper\\reports\\"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="BOOKING_STATUS_FILTER" class="java.lang.String">
+			<defaultValueExpression><![CDATA["FINAL"]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[CALL JASPER_CONTAINER_BOOKING_LIST(
+    $P{VOYAGE_REF},
+    $P{CARRIER_ID},
+    $P{USER_COMPANY_ID},
+    $P{LOAD_PORT_ID_MIN},
+    $P{LOAD_PORT_ID_MAX},
+    $P{DIS_PORT_ID_MIN},
+    $P{DIS_PORT_ID_MAX},
+    $P{LOAD_TERMINAL_ID},
+    $P{DISCHARGE_TERMINAL_ID},
+    $P{BP_ID},
+    $P{BA_ID},
+    $P{CONTAINER_OPERATOR_ID}
+)]]>
+		</queryString>
+		<field name="CT_COL" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="CT_COL"/>
+		</field>
+		<field name="CARRIER_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="CARRIER_ID"/>
+		</field>
+		<field name="BOOKING_VOYAGE_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_VOYAGE_ID"/>
+		</field>
+		<field name="BOOKING_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_ID"/>
+		</field>
+		<field name="SHIPPING_INSTRUCTION_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="SHIPPING_INSTRUCTION_ID"/>
+		</field>
+		<field name="BOOK_LINE_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="BOOK_LINE_ID"/>
+		</field>
+		<field name="SHIP_INSTR_LINE_ITEM_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="SHIP_INSTR_LINE_ITEM_ID"/>
+		</field>
+		<field name="SI_CONTAINER_ALLOCATION_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="SI_CONTAINER_ALLOCATION_ID"/>
+		</field>
+		<field name="BOOKING_NUM" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_NUM"/>
+		</field>
+		<field name="BOOKING_TYPE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_TYPE"/>
+		</field>
+		<field name="BOOKING_PARTY_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_PARTY_NAME"/>
+		</field>
+		<field name="BOOKING_PARTY_REF" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_PARTY_REF"/>
+		</field>
+		<field name="BOOKING_AGENT_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_AGENT_NAME"/>
+		</field>
+		<field name="TERMS_OF_CHARGE" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="TERMS_OF_CHARGE"/>
+		</field>
+		<field name="FREIGHT_CONTRACT_NUMBER" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="FREIGHT_CONTRACT_NUMBER"/>
+		</field>
+		<field name="SHIPPING_INSTRUCTION_NUMBER" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SHIPPING_INSTRUCTION_NUMBER"/>
+		</field>
+		<field name="BILL_OF_LADING_NUMBER" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BILL_OF_LADING_NUMBER"/>
+		</field>
+		<field name="MARKS_AND_NUMBERS" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MARKS_AND_NUMBERS"/>
+		</field>
+		<field name="SHIPPER_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SHIPPER_NAME"/>
+		</field>
+		<field name="SHIPPER_ADDRESS_LINE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SHIPPER_ADDRESS_LINE"/>
+		</field>
+		<field name="CONSIGNEE_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONSIGNEE_NAME"/>
+		</field>
+		<field name="CONSIGNEE_ADDRESS_LINE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONSIGNEE_ADDRESS_LINE"/>
+		</field>
+		<field name="NOTIFY_PARTY_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NOTIFY_PARTY_NAME"/>
+		</field>
+		<field name="NOTIFY_PARTY_ADDRESS_LINE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NOTIFY_PARTY_ADDRESS_LINE"/>
+		</field>
+		<field name="CARRIER_CLAUSE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CARRIER_CLAUSE"/>
+		</field>
+		<field name="CUSTOMS_STATUS_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CUSTOMS_STATUS_CODE"/>
+		</field>
+		<field name="PRECARRIAGE_PLACE_OF_RECEIPT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="PRECARRIAGE_PLACE_OF_RECEIPT"/>
+		</field>
+		<field name="ONCARRIAGE_PLACE_OF_DELIVERY" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ONCARRIAGE_PLACE_OF_DELIVERY"/>
+		</field>
+		<field name="AGENT_AT_LOADPORT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="AGENT_AT_LOADPORT"/>
+		</field>
+		<field name="AGENT_AT_DISCHARGEPORT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="AGENT_AT_DISCHARGEPORT"/>
+		</field>
+		<field name="MRN" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MRN"/>
+		</field>
+		<field name="LOAD_TYPE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="LOAD_TYPE"/>
+		</field>
+		<field name="ARTICLE_NUMBER" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="ARTICLE_NUMBER"/>
+		</field>
+		<field name="SERVICE_TYPE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SERVICE_TYPE"/>
+		</field>
+		<field name="BOOKING_LINE_NUM" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="BOOKING_LINE_NUM"/>
+		</field>
+		<field name="CFS_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CFS_NAME"/>
+		</field>
+		<field name="BLI_COMMODITIES" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="BLI_COMMODITIES"/>
+		</field>
+		<field name="CONT_UN_NUMBERS" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_UN_NUMBERS"/>
+		</field>
+		<field name="OPOL_ETA_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_ETA_TIME"/>
+		</field>
+		<field name="OPOL_ETA_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_ETA_DATE"/>
+		</field>
+		<field name="OPOL_ETD_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_ETD_TIME"/>
+		</field>
+		<field name="OPOL_ETD_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_ETD_DATE"/>
+		</field>
+		<field name="POL_ETA_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="POL_ETA_TIME"/>
+		</field>
+		<field name="POL_ETA_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="POL_ETA_DATE"/>
+		</field>
+		<field name="POL_ETD_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="POL_ETD_TIME"/>
+		</field>
+		<field name="POL_ETD_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="POL_ETD_DATE"/>
+		</field>
+		<field name="POD_ETA_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="POD_ETA_TIME"/>
+		</field>
+		<field name="POD_ETA_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="POD_ETA_DATE"/>
+		</field>
+		<field name="POD_ETD_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="POD_ETD_TIME"/>
+		</field>
+		<field name="POD_ETD_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="POD_ETD_DATE"/>
+		</field>
+		<field name="FPOD_ETA_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_ETA_TIME"/>
+		</field>
+		<field name="FPOD_ETA_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_ETA_DATE"/>
+		</field>
+		<field name="FPOD_ETD_TIME" class="java.sql.Time">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_ETD_TIME"/>
+		</field>
+		<field name="FPOD_ETD_DATE" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_ETD_DATE"/>
+		</field>
+		<field name="VOYAGE_NUMBER" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="VOYAGE_NUMBER"/>
+		</field>
+		<field name="VESSEL_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="VESSEL_NAME"/>
+		</field>
+		<field name="ORIGIN_LOCODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ORIGIN_LOCODE"/>
+		</field>
+		<field name="OPOL_PORT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_PORT"/>
+		</field>
+		<field name="OPOL_TERMINAL_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_TERMINAL_NAME"/>
+		</field>
+		<field name="OPOL_TERMINAL_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="OPOL_TERMINAL_CODE"/>
+		</field>
+		<field name="POL_PORT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POL_PORT"/>
+		</field>
+		<field name="POL_NAME_WO_DIACRITICS" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POL_NAME_WO_DIACRITICS"/>
+		</field>
+		<field name="POL_TERMINAL_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POL_TERMINAL_NAME"/>
+		</field>
+		<field name="POL_TERMINAL_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POL_TERMINAL_CODE"/>
+		</field>
+		<field name="POD_PORT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POD_PORT"/>
+		</field>
+		<field name="POD_NAME_WO_DIACRITICS" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POD_NAME_WO_DIACRITICS"/>
+		</field>
+		<field name="POD_TERMINAL_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POD_TERMINAL_NAME"/>
+		</field>
+		<field name="POD_TERMINAL_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="POD_TERMINAL_CODE"/>
+		</field>
+		<field name="FPOD_PORT" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_PORT"/>
+		</field>
+		<field name="FPOD_TERMINAL_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_TERMINAL_NAME"/>
+		</field>
+		<field name="FPOD_TERMINAL_CODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="FPOD_TERMINAL_CODE"/>
+		</field>
+		<field name="DESTINATION_LOCODE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="DESTINATION_LOCODE"/>
+		</field>
+		<field name="CONT_QUANTITY" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_QUANTITY"/>
+		</field>
+		<field name="CONT_OWNER_TYPE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_OWNER_TYPE"/>
+		</field>
+		<field name="CONT_WEIGHT_VALUE" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_WEIGHT_VALUE"/>
+		</field>
+		<field name="EMPTY_CONTAINER" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.label" value="EMPTY_CONTAINER"/>
+		</field>
+		<field name="DEFAULT_TARE" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="DEFAULT_TARE"/>
+		</field>
+		<field name="CONT_SIZE" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_SIZE"/>
+		</field>
+		<field name="CONT_TYPE_NAME" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_TYPE_NAME"/>
+		</field>
+		<field name="CONT_TYPE_DESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_TYPE_DESC"/>
+		</field>
+		<field name="CONT_ABBREV" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_ABBREV"/>
+		</field>
+		<field name="CONT_DETAIL_TARE" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="CONT_DETAIL_TARE"/>
+		</field>
+		<field name="ISO_CODE_95B" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ISO_CODE_95B"/>
+		</field>
+		<field name="TEU" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="TEU"/>
+		</field>
+		<field name="SI_CONT_WEIGHT" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="SI_CONT_WEIGHT"/>
+		</field>
+		<field name="RFR_DET_ID" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_DET_ID"/>
+		</field>
+		<field name="RFR_MIN_TEMP" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_MIN_TEMP"/>
+		</field>
+		<field name="RFR_MAX_TEMP" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_MAX_TEMP"/>
+		</field>
+		<field name="RFR_HUMID" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_HUMID"/>
+		</field>
+		<field name="RFR_VENT" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_VENT"/>
+		</field>
+		<field name="RFR_CO2_LEVEL" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_CO2_LEVEL"/>
+		</field>
+		<field name="RFR_O2_LEVEL" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_O2_LEVEL"/>
+		</field>
+		<field name="CONNECT_SHIP_REEFER" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.label" value="CONNECT_SHIP_REEFER"/>
+		</field>
+		<field name="CONNECT_SHORE_REEFER" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.label" value="CONNECT_SHORE_REEFER"/>
+		</field>
+		<field name="RFR_USE_RANGE" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.label" value="RFR_USE_RANGE"/>
+		</field>
+		<field name="CONTAINER_NUMBER" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="CONTAINER_NUMBER"/>
+		</field>
+		<field name="OOG_HEIGHT" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="OOG_HEIGHT"/>
+		</field>
+		<field name="OOG_FRONT" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="OOG_FRONT"/>
+		</field>
+		<field name="OOG_BACK" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="OOG_BACK"/>
+		</field>
+		<field name="OOG_LEFT" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="OOG_LEFT"/>
+		</field>
+		<field name="OOG_RIGHT" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="OOG_RIGHT"/>
+		</field>
+		<variable name="quantity" class="java.lang.Integer" resetType="Group" resetGroup="term_pol_pod_size" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="teus" class="java.lang.Integer" resetType="Group" resetGroup="term_pol_pod_size" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY} * $F{TEU}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="gross_weight" class="java.math.BigDecimal" resetType="Group" resetGroup="term_pol_pod_size" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY} * ($F{CONT_WEIGHT_VALUE} + $F{CONT_DETAIL_TARE})]]></variableExpression>
+			<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+		</variable>
+		<variable name="quantity_pol" class="java.lang.Integer" resetType="Group" resetGroup="pol" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="gross_weight_pol" class="java.math.BigDecimal" resetType="Group" resetGroup="pol" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY} * ($F{CONT_WEIGHT_VALUE} + $F{CONT_DETAIL_TARE})]]></variableExpression>
+			<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+		</variable>
+		<variable name="teus_pol" class="java.lang.Integer" resetType="Group" resetGroup="pol" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY} * $F{TEU}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="teus_pol_1" class="java.lang.Integer" resetType="Group" resetGroup="pol" calculation="Sum">
+			<variableExpression><![CDATA[$F{CONT_QUANTITY} * $F{TEU}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<group name="pol">
+			<groupExpression><![CDATA[$F{POL_PORT}]]></groupExpression>
+		</group>
+		<group name="term_pol_pod_size">
+			<groupExpression><![CDATA[$F{POL_TERMINAL_CODE} + $F{POL_PORT} + $F{FPOD_PORT} + $F{CONT_SIZE}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="dataset1" uuid="0354c403-0311-4247-9796-8654e99a6522">
+		<parameter name="BOOK_LINE_ID" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+	TURN_OUT_REFERENCE,
+	TURN_IN_REFERENCE,
+	QUANTITY
+FROM
+	CONTAINER_RELEASE_REFERENCE
+WHERE
+	BOOK_LINE_ID=$P{BOOK_LINE_ID} AND
+	REFERENCE_TYPE="ALLOCATION"]]>
+		</queryString>
+		<field name="TURN_OUT_REFERENCE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="TURN_IN_REFERENCE" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="QUANTITY" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="CARRIER_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USER_COMPANY_ID" class="java.lang.Long"/>
+	<parameter name="VOYAGE_REF" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOAD_PORT_ID_MIN" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOAD_PORT_ID_MAX" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIS_PORT_ID_MIN" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIS_PORT_ID_MAX" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="VESSEL_NAME" class="java.lang.String"/>
+	<parameter name="VOY_NUM" class="java.lang.String"/>
+	<parameter name="LOGO_IMAGE_ID" class="java.lang.Long"/>
+	<parameter name="LOGO_URL" class="java.lang.String"/>
+	<parameter name="LOAD_TERMINAL_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DISCHARGE_TERMINAL_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BP_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BA_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[Required paramemter.
+send 0 for all
+send null for carrier]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CONTAINER_OPERATOR_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[Required paramemter.
+send 0 for all
+send null for carrier]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new Long(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CONTAINER_OPERATOR_NAME" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Java\\tools\\Jaspersoft\\data\\Odyssey\\Netbeans\\OdysseyIReport\\src\\com\\locuslive\\odyssey\\jasper\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BOOKING_STATUS_FILTER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["FINAL"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ANALYSIS_TAG" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[CALL JASPER_CONTAINER_BOOKING_LIST(
+    $P{VOYAGE_REF},
+    $P{CARRIER_ID},
+    $P{USER_COMPANY_ID},
+    $P{LOAD_PORT_ID_MIN},
+    $P{LOAD_PORT_ID_MAX},
+    $P{DIS_PORT_ID_MIN},
+    $P{DIS_PORT_ID_MAX},
+    $P{LOAD_TERMINAL_ID},
+    $P{DISCHARGE_TERMINAL_ID},
+    $P{BP_ID},
+    $P{BA_ID},
+    $P{CONTAINER_OPERATOR_ID},
+    $P{ANALYSIS_TAG},
+    $P{BOOKING_STATUS_FILTER}
+)]]>
+	</queryString>
+	<field name="CT_COL" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="CT_COL"/>
+	</field>
+	<field name="CARRIER_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CARRIER_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="BOOKING_VOYAGE_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_VOYAGE_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="BOOKING_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="SHIPPING_INSTRUCTION_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="SHIPPING_INSTRUCTION_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="BOOK_LINE_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="BOOK_LINE_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="book_line_item"/>
+	</field>
+	<field name="SHIP_INSTR_LINE_ITEM_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="SHIP_INSTR_LINE_ITEM_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ship_instr_line_item"/>
+	</field>
+	<field name="SI_CONTAINER_ALLOCATION_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="SI_CONTAINER_ALLOCATION_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="si_container_allocation"/>
+	</field>
+	<field name="BOOKING_NUM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_NUM"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="BOOKING_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_TYPE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="BOOKING_PARTY_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_PARTY_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="BOOKING_PARTY_REF" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_PARTY_REF"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="BOOKING_AGENT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_AGENT_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="company"/>
+	</field>
+	<field name="TERMS_OF_CHARGE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="TERMS_OF_CHARGE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="FREIGHT_CONTRACT_NUMBER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FREIGHT_CONTRACT_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="freight_contract"/>
+	</field>
+	<field name="SHIPPING_INSTRUCTION_NUMBER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SHIPPING_INSTRUCTION_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="BILL_OF_LADING_NUMBER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BILL_OF_LADING_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="MARKS_AND_NUMBERS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MARKS_AND_NUMBERS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ship_instr_line_item"/>
+	</field>
+	<field name="SHIPPER_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SHIPPER_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="SHIPPER_ADDRESS_LINE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SHIPPER_ADDRESS_LINE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="CONSIGNEE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONSIGNEE_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="CONSIGNEE_ADDRESS_LINE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONSIGNEE_ADDRESS_LINE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="NOTIFY_PARTY_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOTIFY_PARTY_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="NOTIFY_PARTY_ADDRESS_LINE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="NOTIFY_PARTY_ADDRESS_LINE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="CARRIER_CLAUSE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CARRIER_CLAUSE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="CUSTOMS_STATUS_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CUSTOMS_STATUS_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="PRECARRIAGE_PLACE_OF_RECEIPT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PRECARRIAGE_PLACE_OF_RECEIPT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="ONCARRIAGE_PLACE_OF_DELIVERY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ONCARRIAGE_PLACE_OF_DELIVERY"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="AGENT_AT_LOADPORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="AGENT_AT_LOADPORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="AGENT_AT_DISCHARGEPORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="AGENT_AT_DISCHARGEPORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="MRN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MRN"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="LOAD_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="LOAD_TYPE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="ARTICLE_NUMBER" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="ARTICLE_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="shipping_instruction"/>
+	</field>
+	<field name="SERVICE_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SERVICE_TYPE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="book_line_item"/>
+	</field>
+	<field name="BOOKING_LINE_NUM" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_LINE_NUM"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="book_line_item"/>
+	</field>
+	<field name="CFS_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CFS_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="address_book"/>
+	</field>
+	<field name="BLI_COMMODITIES" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BLI_COMMODITIES"/>
+	</field>
+	<field name="CONT_UN_NUMBERS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_UN_NUMBERS"/>
+	</field>
+	<field name="CONT_NUMBERS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_NUMBERS"/>
+	</field>
+	<field name="OPOL_ETA_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_ETA_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="OPOL_ETA_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_ETA_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="OPOL_ETD_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_ETD_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="OPOL_ETD_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_ETD_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POL_ETA_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="POL_ETA_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POL_ETA_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="POL_ETA_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POL_ETD_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="POL_ETD_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POL_ETD_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="POL_ETD_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POD_ETA_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="POD_ETA_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POD_ETA_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="POD_ETA_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POD_ETD_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="POD_ETD_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POD_ETD_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="POD_ETD_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="FPOD_ETA_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_ETA_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="FPOD_ETA_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_ETA_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="FPOD_ETD_TIME" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_ETD_TIME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="FPOD_ETD_DATE" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_ETD_DATE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="VOYAGE_NUMBER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VOYAGE_NUMBER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="VESSEL_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VESSEL_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="ORIGIN_LOCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORIGIN_LOCODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cargo_move_detail"/>
+	</field>
+	<field name="OPOL_PORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_PORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="OPOL_TERMINAL_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_TERMINAL_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="OPOL_TERMINAL_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="OPOL_TERMINAL_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="POL_PORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POL_PORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POL_NAME_WO_DIACRITICS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POL_NAME_WO_DIACRITICS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="un_locode"/>
+	</field>
+	<field name="POL_TERMINAL_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POL_TERMINAL_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="POL_TERMINAL_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POL_TERMINAL_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="POD_PORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POD_PORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="POD_NAME_WO_DIACRITICS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POD_NAME_WO_DIACRITICS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="un_locode"/>
+	</field>
+	<field name="POD_TERMINAL_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POD_TERMINAL_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="POD_TERMINAL_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POD_TERMINAL_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="FPOD_PORT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_PORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="FPOD_TERMINAL_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_TERMINAL_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="FPOD_TERMINAL_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_TERMINAL_CODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="terminal"/>
+	</field>
+	<field name="FPOD_NAME_WO_DIACRITICS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="FPOD_NAME_WO_DIACRITICS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="un_locode"/>
+	</field>
+	<field name="DESTINATION_LOCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="DESTINATION_LOCODE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cargo_move_detail"/>
+	</field>
+	<field name="CONT_QUANTITY" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_QUANTITY"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_detail"/>
+	</field>
+	<field name="CONT_OWNER_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_OWNER_TYPE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_detail"/>
+	</field>
+	<field name="CONT_WEIGHT_VALUE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_WEIGHT_VALUE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_detail"/>
+	</field>
+	<field name="EMPTY_CONTAINER" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="EMPTY_CONTAINER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_detail"/>
+	</field>
+	<field name="DEFAULT_TARE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="DEFAULT_TARE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="CONT_SIZE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_SIZE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="CONT_TYPE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_TYPE_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="CONT_TYPE_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_TYPE_DESC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="CONT_ABBREV" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_ABBREV"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="CONT_DETAIL_TARE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_DETAIL_TARE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="ISO_CODE_95B" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ISO_CODE_95B"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="TEU" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="TEU"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="SI_WEIGHT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="SI_WEIGHT"/>
+	</field>
+	<field name="RFR_DET_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_DET_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_MIN_TEMP" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_MIN_TEMP"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_MAX_TEMP" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_MAX_TEMP"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_HUMID" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_HUMID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_VENT" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_VENT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_CO2_LEVEL" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_CO2_LEVEL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_O2_LEVEL" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_O2_LEVEL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="CONNECT_SHIP_REEFER" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="CONNECT_SHIP_REEFER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="CONNECT_SHORE_REEFER" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="CONNECT_SHORE_REEFER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_USE_RANGE" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_USE_RANGE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_TEMPERATURE_UNIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_TEMPERATURE_UNIT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<field name="RFR_CONTROLLED_ATMOSPHERE" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="RFR_CONTROLLED_ATMOSPHERE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="reefer_detail"/>
+	</field>
+	<group name="PORT_TERMINAL_GROUP" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{POL_PORT}.toString() + $F{POL_TERMINAL_NAME} + $F{FPOD_PORT}.toString() + $F{FPOD_TERMINAL_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="83" splitType="Stretch">
+				<staticText>
+					<reportElement key="staticText-19" x="435" y="3" width="85" height="11" uuid="775f0239-ac20-4238-b3bd-67dfdaa1d127"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[Port of Discharge:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-20" x="435" y="13" width="85" height="11" uuid="c15d3e4e-c7c7-474a-8e84-b401b74c637f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[Discharge Terminal:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-21" mode="Transparent" x="435" y="23" width="85" height="11" uuid="2cf19cdd-a2f1-436e-86c0-d0624744a608"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[POD ETA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-22" mode="Transparent" x="435" y="33" width="85" height="11" uuid="07dd3307-484e-49d3-a74e-864a5e5f2d5f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[POD ETD:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-23" x="92" y="3" width="69" height="11" uuid="4b0444ee-5fc8-4667-b167-35c8d36c5913"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[Port of Loading:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-24" x="92" y="13" width="69" height="11" uuid="88c4ea80-f6de-410c-abc0-d49dd4f658db"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[Load Terminal:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-25" mode="Opaque" x="92" y="23" width="69" height="11" uuid="68e9a9b3-3a8c-436e-bb59-a9e9f9b7c14a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[POL ETA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-26" mode="Transparent" x="92" y="33" width="69" height="11" uuid="a389d439-9530-42a4-8e1d-75a01a54d365"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<text><![CDATA[POL ETD:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" x="161" y="13" width="200" height="11" uuid="1967f4e6-5d74-4178-a668-9aa4cd5f3243"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL_TERMINAL_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" x="520" y="13" width="200" height="10" uuid="ca6c174b-29f9-4c3f-afbb-8134e0074578"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FPOD_TERMINAL_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" x="161" y="3" width="200" height="11" uuid="1c5212fd-19a5-4d37-a890-5133351274c4"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL_NAME_WO_DIACRITICS}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" x="520" y="3" width="200" height="11" uuid="d3ee86c2-af37-409d-87eb-f5b5084c1c0a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FPOD_NAME_WO_DIACRITICS}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement key="textField-1" x="161" y="23" width="74" height="11" isRemoveLineWhenBlank="true" uuid="6e87e7b1-e24f-4b22-84ba-c5b0b6fe7e86"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL_ETA_DATE}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement key="textField-2" x="161" y="33" width="74" height="11" isRemoveLineWhenBlank="true" uuid="56da373b-9e9b-4634-b8c5-d75a4342ca9e"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL_ETD_DATE}]]></textFieldExpression>
+				</textField>
+				<textField pattern="h.mm a" isBlankWhenNull="true">
+					<reportElement key="textField-3" x="235" y="23" width="74" height="11" isRemoveLineWhenBlank="true" uuid="2a5638a6-141f-4b0d-8e15-8992d337425d"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL_ETA_TIME}]]></textFieldExpression>
+				</textField>
+				<textField pattern="h.mm a" isBlankWhenNull="true">
+					<reportElement key="textField-4" x="235" y="33" width="74" height="11" isRemoveLineWhenBlank="true" uuid="e765fd80-f959-4f47-97ff-54c868b996f0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL_ETD_TIME}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement key="textField-5" x="520" y="23" width="74" height="11" isRemoveLineWhenBlank="true" uuid="5430a27f-58e8-4fcc-8e1f-fd9b7ef75f2b"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FPOD_ETA_DATE}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement key="textField-6" x="520" y="33" width="74" height="11" isRemoveLineWhenBlank="true" uuid="213afbba-36a4-4b84-ad78-aa45b3aae2a2"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FPOD_ETD_DATE}]]></textFieldExpression>
+				</textField>
+				<textField pattern="h.mm a" isBlankWhenNull="true">
+					<reportElement key="textField-7" x="594" y="23" width="74" height="11" isRemoveLineWhenBlank="true" uuid="af8fe2d2-7504-4df6-ab1e-3c3cbfd58c1e"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FPOD_ETA_TIME}]]></textFieldExpression>
+				</textField>
+				<textField pattern="h.mm a" isBlankWhenNull="true">
+					<reportElement key="textField-8" x="594" y="33" width="74" height="11" isRemoveLineWhenBlank="true" uuid="48c6b53e-03e8-4d03-a257-dcfea8685aed"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FPOD_ETD_TIME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="48" width="55" height="35" uuid="4bb77c4e-6ea3-4844-87ba-e9126841de80"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[Booking Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="48" width="100" height="35" uuid="f361fbe1-6c26-43a0-8945-d365f4f1764c"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[(P) Booking Party
+(A) Booking Agent]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="185" y="48" width="330" height="35" uuid="7ededa7b-a308-41f0-a6d4-6b3d87b827d4"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[Quantity / Size / Type of Containers
+Container Numbers
+Turn Out Ref / Turn In Ref / Quantity]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="515" y="48" width="55" height="35" uuid="eb90dba1-b42d-4180-b773-7e76cbcb09fb"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[Gross Weight (Kg)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="570" y="48" width="180" height="35" uuid="09585ed2-c082-4e7d-ac9c-47db7f732aa7"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[Description of Goods]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="750" y="48" width="60" height="35" uuid="11ece554-da28-4e07-b0c3-127e56c81793"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[UN Number / IMO CLASS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="155" y="48" width="30" height="35" uuid="a4c4be06-883b-4710-80f0-2ea7e37fd70f"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font fontName="DejaVu Sans" size="9"/>
+					</textElement>
+					<text><![CDATA[Line Nr]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<group name="BOOKING_ID">
+		<groupExpression><![CDATA[$F{BOOKING_ID}]]></groupExpression>
+		<groupHeader>
+			<band splitType="Stretch"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="1" splitType="Stretch">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<line>
+					<reportElement key="line-1" positionType="Float" x="1" y="0" width="810" height="1" isPrintWhenDetailOverflows="true" uuid="62685dd2-56ac-47e5-93dc-a78e1ce528fa">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-8" x="443" y="13" width="84" height="14" uuid="ec89e751-f404-49ab-82d2-7ec97a1f3cb5"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<text><![CDATA[Vessel Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="443" y="27" width="84" height="14" uuid="fb24db11-6090-4602-b8fe-9500cf1cccea"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<text><![CDATA[Voyage Nr:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-15" x="100" y="10" width="270" height="35" uuid="0f93209a-560c-4738-9b2b-366accbe65f4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="22"/>
+				</textElement>
+				<text><![CDATA[BOOKING LIST]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="527" y="13" width="226" height="14" uuid="1709c83d-3d3d-4643-abf7-5c1701704235"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VESSEL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="527" y="27" width="226" height="14" uuid="4b60997b-44ba-44ca-bf63-41e4333d93c4"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VOYAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="0" width="90" height="60" uuid="72494b3a-13d3-4194-93e5-91b4cd04a44c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="COMPANY_ID">
+					<subreportParameterExpression><![CDATA[$F{CARRIER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["_logo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" isPrintRepeatedValues="false" x="0" y="1" width="56" height="12" isRemoveLineWhenBlank="true" uuid="2943c25d-4a0f-4af9-a1a4-a9da81d4d2e7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BOOKING_NUM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="55" y="1" width="100" height="12" isRemoveLineWhenBlank="true" uuid="118edcd2-ae08-4bc6-bb1d-a5fe0a6df318">
+					<printWhenExpression><![CDATA[$V{BOOKING_ID_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{BOOKING_PARTY_NAME} != null ? "(P) " + $F{BOOKING_PARTY_NAME}: null )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="55" y="13" width="100" height="12" isRemoveLineWhenBlank="true" uuid="db56fe1d-8c27-496e-bdec-94d225b0470a">
+					<printWhenExpression><![CDATA[$V{BOOKING_ID_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{BOOKING_AGENT_NAME} != null ? "(A) " + $F{BOOKING_AGENT_NAME} : null )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="155" y="1" width="30" height="12" isRemoveLineWhenBlank="true" forecolor="#000000" uuid="83c963d9-da70-4395-b1f7-8a6643e63687"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BOOKING_LINE_NUM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,##0" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="515" y="1" width="55" height="12" isRemoveLineWhenBlank="true" uuid="1b4dea9c-7043-40a1-bb0a-6c3b7f8436be"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{SI_WEIGHT} !=  null ?
+	$F{SI_WEIGHT} : 
+	($F{CONT_WEIGHT_VALUE} != null && $F{DEFAULT_TARE} != null && $F{CONT_QUANTITY} != null ?
+			new java.lang.Double(($F{CONT_WEIGHT_VALUE} + $F{DEFAULT_TARE})*$F{CONT_QUANTITY}) :
+			""
+	)
+)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="185" y="1" width="330" height="12" isRemoveLineWhenBlank="true" uuid="9970c52b-60ea-4bab-9f08-22a17d424112"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONT_QUANTITY}.toString() + " X " + $F{CONT_SIZE}.toString() + "' " + $F{CONT_TYPE_NAME} +
+    ($F{CONT_OWNER_TYPE}.equals( "C" )
+        ? "\n" + "Carrier owned"
+        : "\n" + "Shipper owned" ) + "\n" + 
+        ("DD".equals($F{SERVICE_TYPE}) ? "Door to Door" : "") + 
+        ("DP".equals($F{SERVICE_TYPE}) ? "Door to Pier" : "") + 
+        ("PD".equals($F{SERVICE_TYPE}) ? "Pier to Door" : "") + 
+        ("PP".equals($F{SERVICE_TYPE}) ? "Pier to Pier" : "") + 
+    ($F{CONT_NUMBERS} != null
+        ? "\n" + $F{CONT_NUMBERS}
+        : "" )]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="750" y="1" width="60" height="12" uuid="3e5a0c7b-783b-473b-a64a-9c125e487c1f"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONT_UN_NUMBERS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="570" y="1" width="180" height="12" uuid="dc8f7a58-4cdd-4922-8378-edb674667902"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{EMPTY_CONTAINER}.booleanValue()
+    ? "Empty Container"
+    : $F{BLI_COMMODITIES}
+    )]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement positionType="Float" x="186" y="14" width="330" height="11" isPrintWhenDetailOverflows="true" uuid="e1416d90-2a9b-4b53-a2d9-c0d605deb668">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="5aba9424-1189-4eae-b475-72627e326119">
+						<datasetParameter name="BOOK_LINE_ID">
+							<datasetParameterExpression><![CDATA[$F{BOOK_LINE_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="11" width="330">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement positionType="Float" x="0" y="0" width="100" height="10" isRemoveLineWhenBlank="true" uuid="13d637e0-d96b-4e49-8830-8d3554aebeeb"/>
+							<textElement>
+								<font fontName="DejaVu Sans" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TURN_OUT_REFERENCE}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement positionType="Float" x="100" y="0" width="100" height="10" isRemoveLineWhenBlank="true" uuid="0c887e04-8125-4d56-aa68-2fa620ebd5ee"/>
+							<textElement>
+								<font fontName="DejaVu Sans" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TURN_IN_REFERENCE}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement positionType="Float" x="200" y="0" width="29" height="10" isRemoveLineWhenBlank="true" uuid="907d6832-60f8-47d5-a4cc-a9ae909131e4"/>
+							<textElement>
+								<font fontName="DejaVu Sans" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{QUANTITY}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="570" y="13" width="80" height="10" isRemoveLineWhenBlank="true" uuid="64856bc3-6a2b-44b3-a6e3-2eeba643155f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(!$F{RFR_USE_RANGE} && $F{RFR_MIN_TEMP} != null ? 
+	"Set Point (" + $F{RFR_TEMPERATURE_UNIT} + "°):\n" :
+	 ($F{RFR_MIN_TEMP} != null ? "Min Temp(" + $F{RFR_TEMPERATURE_UNIT} + "°):\n" : "") + 
+	 ($F{RFR_MAX_TEMP} != null ? "Max Temp (" + $F{RFR_TEMPERATURE_UNIT} + "°):\n" : "")
+	 ) + 
+($F{RFR_HUMID} != null ? "Humidity (%):\n" : "") + 
+(!$F{RFR_CONTROLLED_ATMOSPHERE} ? ($F{RFR_VENT} != null ? "Ventilation (%):\n" : "") :
+($F{RFR_O2_LEVEL} != null ? "O2 Level (%):\n" : "" )+ 
+	($F{RFR_CO2_LEVEL} != null ? "CO2 Level (%):" : "")
+)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="650" y="13" width="30" height="10" isRemoveLineWhenBlank="true" uuid="c90181be-c72e-4311-9e51-4cbc484765d1"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(!$F{RFR_USE_RANGE} && $F{RFR_MIN_TEMP} != null ? $F{RFR_MIN_TEMP} + "\n" : 
+	($F{RFR_MIN_TEMP} != null ? $F{RFR_MIN_TEMP} + "\n" : "" )+ 
+	($F{RFR_MAX_TEMP} != null ? $F{RFR_MAX_TEMP} + "\n" : "")
+) + 
+($F{RFR_HUMID} != null ? $F{RFR_HUMID} + "\n" : "") + 
+(!$F{RFR_CONTROLLED_ATMOSPHERE} ? ($F{RFR_VENT} != null ? $F{RFR_VENT} + "\n" : "") :
+($F{RFR_O2_LEVEL} != null ? $F{RFR_O2_LEVEL} + "\n" : "" ) + 
+	($F{RFR_CO2_LEVEL} != null ? $F{RFR_CO2_LEVEL} : "")
+)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="709" y="0" width="54" height="12" uuid="5303f32e-9947-4e9a-b2c5-8fc2662920dd"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField" x="763" y="0" width="48" height="12" uuid="cba69b90-ac26-4776-9d23-23819bca7dc1"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField" x="626" y="0" width="80" height="12" uuid="ca246eb2-e4f3-4a97-884c-43357eb7731f"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="99" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-10" x="403" y="55" width="207" height="12" uuid="f52d55ce-e09f-48e8-ba0e-6f9eea080b0f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VOYAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="433" y="72" width="173" height="12" uuid="89eb0453-376d-492e-8d45-de134f444693"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CONTAINER_OPERATOR_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="435" y="17" width="173" height="12" uuid="4f67bdca-7410-498c-a303-c7e1172b0790"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CONTAINER_OPERATOR_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-34" x="329" y="0" width="78" height="12" uuid="ce25b798-ee8d-460b-a711-5c99896d8084"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Voyage Number:]]></text>
+			</staticText>
+			<line>
+				<reportElement key="" positionType="Float" x="0" y="86" width="810" height="1" uuid="6a54aae3-91b8-472a-829c-dea10ba12f7b"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-33" x="59" y="55" width="64" height="12" uuid="dbd5f68b-0f73-4211-adfd-ed59b2e4c8e6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Vessel Name:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="108" y="88" width="425" height="11" uuid="59c9414d-2289-40bd-a392-ff08f79007fb"/>
+				<subreportParameter name="CARRIER_ID">
+					<subreportParameterExpression><![CDATA[$P{CARRIER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="USER_COMPANY_ID">
+					<subreportParameterExpression><![CDATA[$P{USER_COMPANY_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="VESSEL_NAME">
+					<subreportParameterExpression><![CDATA[$P{VESSEL_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="VOY_NUM">
+					<subreportParameterExpression><![CDATA[$P{VOY_NUM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="VOYAGE_REF">
+					<subreportParameterExpression><![CDATA[$P{VOYAGE_REF}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOGO_IMAGE_ID">
+					<subreportParameterExpression><![CDATA[$P{LOGO_IMAGE_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOGO_URL">
+					<subreportParameterExpression><![CDATA[$P{LOGO_URL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOAD_PORT_ID_MIN">
+					<subreportParameterExpression><![CDATA[$P{LOAD_PORT_ID_MIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOAD_PORT_ID_MAX">
+					<subreportParameterExpression><![CDATA[$P{LOAD_PORT_ID_MAX}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DIS_PORT_ID_MIN">
+					<subreportParameterExpression><![CDATA[$P{DIS_PORT_ID_MIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DIS_PORT_ID_MAX">
+					<subreportParameterExpression><![CDATA[$P{DIS_PORT_ID_MAX}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOAD_TERMINAL_ID">
+					<subreportParameterExpression><![CDATA[$P{LOAD_TERMINAL_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DISCHARGE_TERMINAL_ID">
+					<subreportParameterExpression><![CDATA[$P{DISCHARGE_TERMINAL_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BP_ID">
+					<subreportParameterExpression><![CDATA[$P{BP_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BA_ID">
+					<subreportParameterExpression><![CDATA[$P{BA_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CONTAINER_OPERATOR_ID">
+					<subreportParameterExpression><![CDATA[$P{CONTAINER_OPERATOR_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CONTAINER_OPERATOR_NAME">
+					<subreportParameterExpression><![CDATA[$P{CONTAINER_OPERATOR_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BOOKING_STATUS_FILTER">
+					<subreportParameterExpression><![CDATA[$P{BOOKING_STATUS_FILTER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ContainerBookingListDestinations.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-9" x="124" y="0" width="200" height="12" uuid="b2b45de9-6748-44e2-b7a0-dbf01ce402b0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VESSEL_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-33" x="61" y="0" width="64" height="12" uuid="619cf6e2-4f82-48cc-be6c-bd958bb3f9e7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Vessel Name:]]></text>
+			</staticText>
+			<break>
+				<reportElement positionType="Float" x="0" y="50" width="563" height="1" uuid="790e1f17-41c9-4866-a082-ff8490f3dbb0"/>
+			</break>
+			<line>
+				<reportElement key="" positionType="Float" x="0" y="29" width="810" height="3" uuid="f76e0582-8c3e-4391-85d3-a41f8ae18bc5"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-9" x="122" y="55" width="200" height="12" uuid="f31b95ff-b6f9-4010-b2a0-f674c47068b6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VESSEL_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-28" x="327" y="72" width="106" height="12" uuid="1ab4c2e1-dc8c-419e-b2ce-fad2a7429f8a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Container Operator: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-27" x="61" y="17" width="261" height="12" uuid="044cd019-34f3-428d-8b41-73da763d21dd"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Booking List Summary Per Load Port]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-28" x="329" y="17" width="106" height="12" uuid="98834e33-3c64-42c3-8da3-77e3573135d6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Container Operator: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-34" x="327" y="55" width="78" height="12" uuid="57251766-a86e-4ef0-8bc0-824c52d99b4a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Voyage Number:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-27" x="59" y="72" width="263" height="12" uuid="5d12fe9e-457f-4e4a-a33d-fb2b4f6b2b85"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Booking List Summary Per Final Port]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-10" x="405" y="0" width="207" height="12" uuid="83efec51-1baf-48af-b65f-f672387d71c6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VOYAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="110" y="35" width="425" height="11" uuid="1e55937d-a1c2-41d7-a720-68f25025e60f"/>
+				<subreportParameter name="USER_COMPANY_ID">
+					<subreportParameterExpression><![CDATA[$P{USER_COMPANY_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CARRIER_ID">
+					<subreportParameterExpression><![CDATA[$P{CARRIER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="VESSEL_NAME">
+					<subreportParameterExpression><![CDATA[$P{VESSEL_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="VOY_NUM">
+					<subreportParameterExpression><![CDATA[$P{VOY_NUM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="VOYAGE_REF">
+					<subreportParameterExpression><![CDATA[$P{VOYAGE_REF}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOGO_IMAGE_ID">
+					<subreportParameterExpression><![CDATA[$P{LOGO_IMAGE_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOGO_URL">
+					<subreportParameterExpression><![CDATA[$P{LOGO_URL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOAD_PORT_ID_MIN">
+					<subreportParameterExpression><![CDATA[$P{LOAD_PORT_ID_MIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOAD_PORT_ID_MAX">
+					<subreportParameterExpression><![CDATA[$P{LOAD_PORT_ID_MAX}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DIS_PORT_ID_MIN">
+					<subreportParameterExpression><![CDATA[$P{DIS_PORT_ID_MIN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DIS_PORT_ID_MAX">
+					<subreportParameterExpression><![CDATA[$P{DIS_PORT_ID_MAX}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOAD_TERMINAL_ID">
+					<subreportParameterExpression><![CDATA[$P{LOAD_TERMINAL_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DISCHARGE_TERMINAL_ID">
+					<subreportParameterExpression><![CDATA[$P{DISCHARGE_TERMINAL_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BP_ID">
+					<subreportParameterExpression><![CDATA[$P{BP_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BA_ID">
+					<subreportParameterExpression><![CDATA[$P{BA_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CONTAINER_OPERATOR_ID">
+					<subreportParameterExpression><![CDATA[$P{CONTAINER_OPERATOR_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CONTAINER_OPERATOR_NAME">
+					<subreportParameterExpression><![CDATA[$P{CONTAINER_OPERATOR_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="BOOKING_STATUS_FILTER">
+					<subreportParameterExpression><![CDATA[$P{BOOKING_STATUS_FILTER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["ContainerBookingListSummary.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+	<noData>
+		<band height="176" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-35" x="100" y="10" width="270" height="35" uuid="75894648-407a-48fa-b660-0e1cfa22468c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="22"/>
+				</textElement>
+				<text><![CDATA[BOOKING LIST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-36" x="184" y="89" width="331" height="25" uuid="af3eb3f5-8cd8-4305-a6da-a287a7a5bb58"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Sorry, no results could be found based on your search criteria. Please review/change your search criteria and try again.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-37" x="183" y="127" width="79" height="13" uuid="98ffaa3a-ecd5-45b9-931b-d197c6ad7789"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Many Thanks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-38" x="183" y="140" width="141" height="13" uuid="ba804238-0429-419a-92ad-d2ff4a70001b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true" pdfFontName=""/>
+				</textElement>
+				<text><![CDATA[Odyssey Support Centre]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="527" y="10" width="226" height="14" uuid="0aaf3358-4fef-45d3-8cc4-ffde8f59523b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VESSEL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="527" y="24" width="226" height="14" uuid="ebde8b34-e846-43f5-89a9-f1c29f5b5cc7"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VOY_NUM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-8" x="443" y="10" width="84" height="14" uuid="8372a432-a34b-4710-ad8a-61553026ce73"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<text><![CDATA[Vessel Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="443" y="24" width="84" height="14" uuid="fdae5a27-28a5-4a0f-9ecb-c438352036da"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<text><![CDATA[Voyage Nr:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="0" width="90" height="60" uuid="073758d0-20e2-42dd-8aef-9215dd075d80">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<subreportParameter name="COMPANY_ID">
+					<subreportParameterExpression><![CDATA[$F{CARRIER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["_logo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</noData>
+</jasperReport>

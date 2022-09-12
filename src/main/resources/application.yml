@@ -1,0 +1,42 @@
+auth-server-url: ${AUTH_SERVER_URL}/auth
+org:
+  eclipse:
+    microprofile:
+      rest:
+        client:
+          propagateHeaders: x-request-id,x-ot-span-context
+quarkus:
+  log:
+    level: INFO
+    category:
+      "com.locuslive":
+        level: INFO
+  datasource:
+    db-kind: mysql
+    username: ${DB_USER}
+    password: ${DB_PWD}
+    jdbc:
+      url: ${DB_URL}
+  http:
+    port: ${HTTP_PORT:8080}
+    cors: false
+    auth:
+      permission:
+        authenticated:
+          paths: /*
+          policy: authenticated
+  oidc:
+    auth-server-url: ${AUTH_SERVER_URL}/auth/realms/master
+    client-id: admin-cli
+    application-type: service
+  smallrye-openapi:
+    path: /swagger
+    info-version: 1.0.1
+  swagger-ui:
+    always-include: true
+    path: /swagger-ui
+  tls:
+    trust-all: true
+  jaeger:
+    propagation: b3
+    sender-factory: noop

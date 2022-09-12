@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BookingListContainer" pageWidth="570" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="e5f977a9-01af-41a0-a074-e8465d827760">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="remote_prod"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="CARRIER_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="VESSEL_NAME" class="java.lang.String"/>
+	<parameter name="VOY_NUM" class="java.lang.String"/>
+	<parameter name="VOYAGE_REF" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO_IMAGE_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO_URL" class="java.lang.String"/>
+	<parameter name="LOAD_PORT_ID_MIN" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long("-9223372036854775808")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOAD_PORT_ID_MAX" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long("9223372036854775807")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIS_PORT_ID_MIN" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long("-9223372036854775808")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIS_PORT_ID_MAX" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long("9223372036854775807")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOAD_TERMINAL_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DISCHARGE_TERMINAL_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BP_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BA_ID" class="java.lang.Long">
+		<parameterDescription><![CDATA[send either 0 for 'All' or an actuall ID]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CONTAINER_OPERATOR_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CONTAINER_OPERATOR_NAME" class="java.lang.String"/>
+	<parameter name="LOAD_PORT_NAME" class="java.lang.String"/>
+	<parameter name="LOAD_PORT_ETD" class="java.util.Date" isForPrompting="false"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT BOOK_LINE_ITEM.BOOK_LINE_ID,
+       SUBSTRING(BP_AB.ADDRESS_NAME, 1, 50)                                 AS BOOKING_PARTY_NAME,
+
+       BOOKING_ITINERARY.LOAD_LOCODE                                        AS ORIG_POL_PORT_ID,
+       POL_VOYAGE.SEQUENCE,
+       BOOKING.LOAD_PORT,
+       POL_VOYAGE.PORT_ID                                                   AS POL,
+       POL_VOYAGE.PT_LIST_ID,
+       BOOKING.DISCHARGE_PORT,
+       BOOKING_ITINERARY.DISCHARGE_LOCODE                                   AS POD,
+       CONT_DETAIL.CONT_QUANTITY,
+       CONT_DETAIL.EMPTY_CONTAINER,
+       CONT_TYPE.CONT_TYPE_ID,
+       CONT_TYPE.TEU * CONT_DETAIL.CONT_QUANTITY                            AS TEU,
+       CONT_TYPE.CONT_SIZE,
+       CONT_TYPE.CONT_ABBREV                                                AS CONT_TYPE_NAME,
+
+       SUM(VERIFIED_GROSS_MASS_INFO.VERIFIED_GROSS_MASS)                    AS VGM_WEIGHT,
+       COUNT(DISTINCT VERIFIED_GROSS_MASS_INFO.VERIFIED_GROSS_MASS_INFO_ID) AS VGM_COUNT
+
+FROM BOOKING_VOYAGE AS POL_VOYAGE
+         JOIN BOOKING_VOYAGE AS POD_VOYAGE ON POL_VOYAGE.BOOKING_ITINERARY_ID = POD_VOYAGE.BOOKING_ITINERARY_ID AND
+                                              (POD_VOYAGE.PORT_TYPE = 2 OR POD_VOYAGE.PORT_TYPE = 4) AND
+                                              (POD_VOYAGE.BOOKING_INDEX = POL_VOYAGE.BOOKING_INDEX + 1)
+
+         JOIN BOOKING_ITINERARY ON POL_VOYAGE.BOOKING_ITINERARY_ID = BOOKING_ITINERARY.BOOKING_ITINERARY_ID AND
+                                   BOOKING_ITINERARY.VOYAGE_SET = 1
+
+         JOIN BOOKING_VOYAGE AS FPOD_VOYAGE ON BOOKING_ITINERARY.DISCHARGE_PORT = FPOD_VOYAGE.BOOKING_VOYAGE_ID
+
+         JOIN BOOKING ON BOOKING_ITINERARY.BOOKING_ID = BOOKING.BOOKING_ID
+         JOIN BOOK_LINE_ITEM ON BOOKING.BOOKING_ID = BOOK_LINE_ITEM.BOOKING_ID
+         JOIN CONT_DETAIL ON BOOK_LINE_ITEM.CONT_DETAIL_ID = CONT_DETAIL.CONT_DETAIL_ID
+         JOIN CONT_TYPE ON CONT_DETAIL.CONT_TYPE_ID = CONT_TYPE.CONT_TYPE_ID
+
+         LEFT JOIN SI_CONTAINER_ALLOCATION ON BOOK_LINE_ITEM.BOOK_LINE_ID = SI_CONTAINER_ALLOCATION.BOOK_LINE_ID
+         LEFT JOIN VERIFIED_GROSS_MASS_INFO ON BOOK_LINE_ITEM.BOOKING_ID = VERIFIED_GROSS_MASS_INFO.BOOKING_ID AND
+                                               SI_CONTAINER_ALLOCATION.CONTAINER_NUMBER = VERIFIED_GROSS_MASS_INFO.CONTAINER_NUMBER
+
+         LEFT JOIN `ADDRESS_DETAIL_LIST` BP_ADL ON BOOKING.ADDRESS_DETAIL_LIST_ID = BP_ADL.ADDRESS_DETAIL_LIST_ID
+         LEFT JOIN ADDRESS_BOOK BP_AB ON BP_ADL.ADD_BOOK_ID = BP_AB.ADD_BOOK_ID
+
+WHERE POL_VOYAGE.CARRIER = $P{CARRIER_ID}
+  AND POL_VOYAGE.VOYAGE_REF = $P{VOYAGE_REF}
+  AND POL_VOYAGE.PT_LIST_ID BETWEEN $P{LOAD_PORT_ID_MIN} AND $P{LOAD_PORT_ID_MAX}
+  AND FPOD_VOYAGE.PT_LIST_ID BETWEEN $P{DIS_PORT_ID_MIN} AND $P{DIS_PORT_ID_MAX}
+  AND IF(ISNULL($P{LOAD_TERMINAL_ID}) OR $P{LOAD_TERMINAL_ID} = 0, TRUE, (POL_VOYAGE.TERMINAL_ID = $P{LOAD_TERMINAL_ID}))
+  AND IF(ISNULL($P{DISCHARGE_TERMINAL_ID}) OR $P{DISCHARGE_TERMINAL_ID} = 0, TRUE, (FPOD_VOYAGE.TERMINAL_ID = $P{DISCHARGE_TERMINAL_ID}))
+  AND IF((ISNULL($P{BP_ID}) OR $P{BP_ID} = 0), TRUE, BOOKING.SHIPPER = $P{BP_ID})
+  AND IF((ISNULL($P{BA_ID}) OR $P{BA_ID} = 0), TRUE, BOOKING.REFERRING_AGENT_COMPANY = $P{BA_ID})
+  AND IF(($P{CONTAINER_OPERATOR_ID} = 0), TRUE, (ISNULL($P{CONTAINER_OPERATOR_ID}) AND ISNULL(BOOKING.CONTAINER_OPERATOR_ID)) OR BOOKING.CONTAINER_OPERATOR_ID = $P{CONTAINER_OPERATOR_ID})
+  AND BOOKING.STATUS IN ('A', 'I', 'X')
+
+GROUP BY BOOK_LINE_ITEM.BOOK_LINE_ID
+
+ORDER BY POL_VOYAGE.SEQUENCE,
+         POD,
+         BOOKING_PARTY_NAME,
+         CONT_TYPE.CONT_SIZE,
+         CONT_TYPE.CONT_TYPE_ID,
+         BOOKING_ITINERARY.LOAD_LOCODE;]]>
+	</queryString>
+	<field name="BOOK_LINE_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="BOOK_LINE_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="book_line_item"/>
+	</field>
+	<field name="BOOKING_PARTY_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="BOOKING_PARTY_NAME"/>
+	</field>
+	<field name="ORIG_POL_PORT_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ORIG_POL_PORT_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schedule_port"/>
+	</field>
+	<field name="SEQUENCE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="SEQUENCE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking_voyage"/>
+	</field>
+	<field name="LOAD_PORT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="LOAD_PORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="POL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schedule_port"/>
+	</field>
+	<field name="PT_LIST_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="PT_LIST_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schedule_port"/>
+	</field>
+	<field name="DISCHARGE_PORT" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="DISCHARGE_PORT"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
+	</field>
+	<field name="POD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="POD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="schedule_port"/>
+	</field>
+	<field name="CONT_QUANTITY" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_QUANTITY"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_detail"/>
+	</field>
+	<field name="EMPTY_CONTAINER" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="EMPTY_CONTAINER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_detail"/>
+	</field>
+	<field name="CONT_TYPE_ID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_TYPE_ID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="TEU" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="TEU"/>
+	</field>
+	<field name="CONT_SIZE" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_SIZE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="CONT_TYPE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="CONT_TYPE_NAME"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cont_type"/>
+	</field>
+	<field name="VGM_WEIGHT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="VGM_WEIGHT"/>
+	</field>
+	<field name="VGM_COUNT" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="VGM_COUNT"/>
+	</field>
+	<variable name="TotalContainers" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{CONT_QUANTITY}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_TEU" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{TEU}]]></variableExpression>
+	</variable>
+	<variable name="TOTAL_VGM" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{VGM_WEIGHT} != null ? $F{VGM_WEIGHT}.setScale(1, java.math.RoundingMode.UP) : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="GROUP1_CONTAINERS" class="java.lang.Long" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{CONT_QUANTITY}]]></variableExpression>
+	</variable>
+	<variable name="GROUP1_TEU" class="java.lang.Long" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{TEU}]]></variableExpression>
+	</variable>
+	<variable name="GROUP1_VGM" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{VGM_WEIGHT} != null ? $F{VGM_WEIGHT}.setScale(1, java.math.RoundingMode.UP) : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="GROUP2_TEU" class="java.lang.Long" resetType="Group" resetGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{TEU}]]></variableExpression>
+	</variable>
+	<variable name="GROUP2_CONTAINERS" class="java.lang.Long" resetType="Group" resetGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{CONT_QUANTITY}]]></variableExpression>
+		<initialValueExpression><![CDATA[0L]]></initialValueExpression>
+	</variable>
+	<variable name="GROUP2_VGM_COUNT" class="java.lang.Long" resetType="Group" resetGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{VGM_COUNT}]]></variableExpression>
+		<initialValueExpression><![CDATA[0L]]></initialValueExpression>
+	</variable>
+	<variable name="GROUP2_VGM" class="java.math.BigDecimal" resetType="Group" resetGroup="Group2" calculation="Sum">
+		<variableExpression><![CDATA[$F{VGM_WEIGHT} != null ? $F{VGM_WEIGHT}.setScale(1, java.math.RoundingMode.UP) : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{POL}]]></groupExpression>
+		<groupFooter>
+			<band height="12">
+				<frame>
+					<reportElement x="0" y="0" width="570" height="12" uuid="f6bba6c0-b562-446b-8007-d3f19d4195d1"/>
+					<box rightPadding="0">
+						<topPen lineWidth="0.2"/>
+						<bottomPen lineWidth="0.2"/>
+					</box>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="375" height="12" backcolor="#CCCCCC" uuid="74657f14-7439-4f1c-b225-5e3270a4189f">
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<box rightPadding="2"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{POL} + " total:"]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="textField" stretchType="RelativeToTallestObject" x="375" y="0" width="40" height="12" uuid="9bbd1ad4-6a64-4b30-98ae-bcaf0792aa66"/>
+						<box rightPadding="2"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{GROUP1_CONTAINERS}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement key="textField" stretchType="RelativeToTallestObject" x="480" y="0" width="40" height="12" uuid="6300389d-008c-435f-80de-210086c12392">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box rightPadding="2"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{GROUP1_TEU}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" pattern="0.0" isBlankWhenNull="true">
+						<reportElement key="textField" stretchType="RelativeToTallestObject" x="520" y="0" width="50" height="12" uuid="a7d2b588-0e85-48d5-be15-74631916e2b1"/>
+						<box rightPadding="2"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$V{GROUP1_VGM}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{POL} + $F{POD} + $F{BOOKING_PARTY_NAME} + $F{ORIG_POL_PORT_ID} + $F{CONT_TYPE_ID}]]></groupExpression>
+		<groupFooter>
+			<band height="12">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="125" y="0" width="250" height="12" uuid="cf9cd7d9-b4a7-4138-a4a8-b0f7425ee4b9">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BOOKING_PARTY_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField-3" stretchType="RelativeToTallestObject" x="45" y="0" width="40" height="12" uuid="ca5f2df3-82b2-4a75-ab61-3038e58feeb4">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POL}.replaceAll( " ", "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" stretchType="RelativeToTallestObject" x="85" y="0" width="40" height="12" uuid="f5cef975-a620-47c7-9b76-6bf95d9995b8">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{POD}.replaceAll( " ", "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" stretchType="RelativeToTallestObject" x="375" y="0" width="40" height="12" uuid="9331401a-cc3b-452e-aa09-9e90b16adbb9"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{GROUP2_CONTAINERS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" stretchType="RelativeToTallestObject" x="415" y="0" width="25" height="12" uuid="3314746c-8b3b-42a3-b648-3dae7c0d5be6"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CONT_SIZE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" stretchType="RelativeToTallestObject" x="440" y="0" width="40" height="12" uuid="47a814bf-5ef3-4391-90b9-30e6d0f31be0"/>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CONT_TYPE_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" stretchType="RelativeToTallestObject" x="480" y="0" width="40" height="12" uuid="2bfd5134-3dec-4edf-83ff-d0147baf48e8">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{GROUP2_TEU}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement key="textField" stretchType="RelativeToTallestObject" x="0" y="0" width="45" height="12" uuid="c858c79a-247f-4f8e-82ba-2c047e17e582">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ORIG_POL_PORT_ID}.replaceAll( " ", "" )]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="0.0" isBlankWhenNull="true">
+					<reportElement x="520" y="0" width="50" height="12" uuid="f7116fab-6a96-489e-ad06-057b7d7edb4c">
+						<printWhenExpression><![CDATA[$V{GROUP2_VGM_COUNT}.equals($V{GROUP2_CONTAINERS})]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{GROUP2_VGM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="0.0" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="520" y="0" width="50" height="12" forecolor="#FFFFFF" backcolor="#FF0400" uuid="c8dbb255-59a5-47e7-a5b4-f6abfb5ec77f">
+						<printWhenExpression><![CDATA[!$V{GROUP2_VGM_COUNT}.equals($V{GROUP2_CONTAINERS})]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{GROUP2_VGM}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" stretchType="RelativeToTallestObject" x="80" y="0" width="400" height="12" uuid="cf47f447-abc8-4ad1-aa19-fe95d79c5324">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VESSEL_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-17" stretchType="RelativeToTallestObject" x="0" y="0" width="80" height="12" uuid="9ca53a2a-297f-4697-b8c4-ae6eb9c2f071"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[VESSEL:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-18" stretchType="RelativeToTallestObject" x="0" y="12" width="80" height="12" uuid="8b0376d5-50a5-4836-9935-5928497d2692"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[VOY:  ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" stretchType="RelativeToTallestObject" x="80" y="12" width="400" height="12" uuid="64d8c266-9e19-4cc5-96e8-7a1736a4c9c3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VOY_NUM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-19" stretchType="RelativeToTallestObject" x="0" y="24" width="80" height="12" uuid="25757a94-d778-407e-9eb7-b2f8de218660"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[DATE:  ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement key="textField" stretchType="RelativeToTallestObject" x="80" y="24" width="400" height="12" uuid="0289b9e0-70d2-4225-ad81-1eac13fbfad6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-22" stretchType="RelativeToTallestObject" mode="Opaque" x="45" y="36" width="40" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="e40519d7-6b3e-4f10-9a1f-0ae5dd6fb9df">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[POL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-1" stretchType="RelativeToTallestObject" mode="Opaque" x="85" y="36" width="40" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="064e1ebc-686f-4f91-8053-4c0d39c3e7c1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[POD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-39" stretchType="RelativeToTallestObject" mode="Opaque" x="125" y="36" width="250" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="f37ae346-93bc-463c-9020-27f8d66860d6">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[BOOKING PARTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" stretchType="RelativeToTallestObject" mode="Opaque" x="375" y="36" width="40" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="4cb65389-0b61-4b8a-befc-50ce3dac1eaf">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" stretchType="RelativeToTallestObject" mode="Opaque" x="415" y="36" width="25" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="0278119e-a134-4fcd-806e-eb88a944333c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[SIZE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" stretchType="RelativeToTallestObject" mode="Opaque" x="440" y="36" width="40" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="65a15ed1-6547-45e7-8187-e069e27dad16"/>
+				<box leftPadding="2" rightPadding="0">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[TYPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" stretchType="RelativeToTallestObject" mode="Opaque" x="480" y="36" width="40" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="319ad911-5d88-44cb-8baf-7cb1205a0ff6">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[TEU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" stretchType="RelativeToTallestObject" mode="Opaque" x="520" y="36" width="50" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="15849aa0-632b-4f53-9ba1-baed16901716">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[VGM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-22" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="36" width="45" height="30" forecolor="#FFFFFF" backcolor="#0066FF" uuid="4354b06e-319a-4faa-be7c-99bf4316b8e2">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Original POL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="12" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="375" height="12" backcolor="#CCCCCC" uuid="e287986f-dbc2-41e7-af1f-1894c791c1b8">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Voyage Totals:"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="375" y="0" width="40" height="12" uuid="f61d213a-eee1-4075-8051-735718b3eeba">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalContainers}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="480" y="0" width="40" height="12" uuid="a914ac7c-85d1-4cf2-8f11-9a09ca49c102">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_TEU}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="0.0" isBlankWhenNull="true">
+				<reportElement x="520" y="0" width="50" height="12" uuid="8b028d63-7c29-40fd-a0d4-1fe4a6f45d89">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTAL_VGM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+	<noData>
+		<band height="124" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-4" stretchType="RelativeToTallestObject" x="140" y="4" width="220" height="12" uuid="ca5a81c6-6490-4f1b-9989-e81d3a89d406"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VESSEL_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-26" stretchType="RelativeToTallestObject" x="60" y="4" width="80" height="12" uuid="67d81f42-d303-4018-9e12-230126df022a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[VESSEL:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-27" stretchType="RelativeToTallestObject" x="60" y="16" width="80" height="12" uuid="9cb62dcf-2304-4b11-b0a2-715f2b4fd66f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[VOY:  ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-6" stretchType="RelativeToTallestObject" x="140" y="16" width="220" height="12" uuid="9e9b2590-72a6-45f6-b569-f7425fef7d8e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VOY_NUM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-28" stretchType="RelativeToTallestObject" x="60" y="28" width="80" height="12" uuid="09ca5ecd-e426-4f97-9b3c-b0d106cd65d2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[DATE:  ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement key="textField-7" stretchType="RelativeToTallestObject" x="140" y="28" width="220" height="12" uuid="0d12a520-473b-4e13-9823-d7d3dd90b7d4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-31" x="60" y="52" width="300" height="37" uuid="f04809db-5da7-4368-90a3-eeb116c4d652"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sorry, no results could be found based on your search criteria. Please review/change your search criteria and try again.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-32" x="60" y="89" width="79" height="13" uuid="855a505e-5abf-4d3e-a204-a90fb4bb1c7b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Many Thanks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-33" x="60" y="102" width="141" height="13" uuid="ed2937d3-742e-483e-a17f-4b0a85dfecf9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Odyssey Support Centre]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
